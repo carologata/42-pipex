@@ -10,10 +10,12 @@
 
 typedef struct s_cmd
 {
-    int input;
-    int output;
-    
-
-}   t_cmd;
+	char	*infile;
+	char	*outfile;
+	char	***args;
+	char	**paths;
+	char	**cmd;
+	int		count_cmds;
+}			t_cmd;
 
 #endif 
