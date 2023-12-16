@@ -23,8 +23,8 @@ void	check_num_args(int argc)
 
 void	exit_free_error(t_cmd *sys)
 {
-	perror("Error");
 	free_all(sys);
+	perror("Error");
 	exit(ERROR);
 }
 
