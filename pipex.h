@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/16 17:28:13 by cogata            #+#    #+#             */
+/*   Updated: 2023/12/16 17:28:14 by cogata           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_H
 # define PIPEX_H
 
@@ -12,8 +24,7 @@
 # define OK 0
 # define NOT_FOUND -1
 # define R_NOK -2
-# define W_NOK -3
-# define X_NOK -4
+# define X_NOK -3
 # define FOUND 1
 
 typedef struct s_cmd

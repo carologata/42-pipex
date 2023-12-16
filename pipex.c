@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/16 17:27:39 by cogata            #+#    #+#             */
+/*   Updated: 2023/12/16 17:27:41 by cogata           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	fill_args(t_cmd *sys, int argc, char *argv[])
@@ -51,7 +63,6 @@ int	main(int argc, char *argv[], char *envp[])
 	t_cmd	sys;
 	int		fds[argc - 4][2];
 
-	// check_num_args(argc);
 	sys.infile = argv[1];
 	sys.outfile = argv[argc - 1];
 	sys.args = malloc((argc - 3) * sizeof(char ***));

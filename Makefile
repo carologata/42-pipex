@@ -5,7 +5,7 @@ LIBFT	:= ./libft
 HEADERS	:= -I $(LIBFT)
 LIBS	:= $(LIBFT)/libft.a
 
-SRCS	:= pipex.c pipex_process.c pipex_exec.c pipex_utils.c
+SRCS	:= pipex.c pipex_process.c pipex_exec.c pipex_check.c  pipex_utils.c
 OBJS	:= ${SRCS:.c=.o}
 
 all: libft $(NAME)

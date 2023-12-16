@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_process.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/16 17:27:15 by cogata            #+#    #+#             */
+/*   Updated: 2023/12/16 17:27:16 by cogata           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	process_first_cmd(t_cmd *sys, int (*fds)[2], int i)
@@ -16,7 +28,7 @@ void	process_first_cmd(t_cmd *sys, int (*fds)[2], int i)
 	{
 		waitpid(fork_id, &status, 0);
 		close(fds[i][1]);
-		if (((status & 0x7f) == 0) && ((status & 0xff00) >> 8) == 0)
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 		{
 			free_all(sys);
 			exit(ERROR);
@@ -36,8 +48,8 @@ void	process_last_cmd(t_cmd *sys, int (*fds)[2], int i)
 		execute_last_cmd(sys, fds, i);
 	else
 	{
-		wait(NULL);
-		if (((status & 0x7f) == 0) && ((status & 0xff00) >> 8) == 0)
+		waitpid(fork_id, &status, 0);
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 		{
 			free_all(sys);
 			exit(ERROR);
@@ -61,10 +73,10 @@ void	process_middle_cmd(t_cmd *sys, int (*fds)[2], int i)
 		execute_middle_cmd(sys, fds, i);
 	else
 	{
-		wait(NULL);
+		waitpid(fork_id, &status, 0);
 		close(fds[i - 1][0]);
 		close(fds[i][1]);
-		if (((status & 0x7f) == 0) && ((status & 0xff00) >> 8) == 0)
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 		{
 			free_all(sys);
 			exit(ERROR);

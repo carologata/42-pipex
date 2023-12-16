@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/16 17:27:33 by cogata            #+#    #+#             */
+/*   Updated: 2023/12/16 17:27:34 by cogata           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void	check_num_args(int argc)
@@ -13,12 +25,6 @@ void	exit_free_error(t_cmd *sys)
 {
 	perror("Error");
 	free_all(sys);
-	exit(ERROR);
-}
-
-void	exit_child_error(void)
-{
-	perror("Error");
 	exit(ERROR);
 }
 
