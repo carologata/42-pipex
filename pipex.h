@@ -35,19 +35,23 @@ typedef struct s_cmd
 	char	**paths;
 	char	**cmd;
 	int		count_cmds;
+	char	*limiter;
+	int		*is_heredoc;
 }			t_cmd;
 
-void		fill_args(t_cmd *sys, int argc, char *argv[]);
+void		fill_args(t_cmd *sys, int argc, char *argv[], int constants);
 void		fill_paths(t_cmd *sys, char *envp[]);
-void		fill_cmds(t_cmd *sys, int argc);
+void		fill_cmds(t_cmd *sys, int argc, int constants);
 
-void		process_first_cmd(t_cmd *sys, int (*fds)[2], int i);
-void		process_last_cmd(t_cmd *sys, int (*fds)[2], int i);
-void		process_middle_cmd(t_cmd *sys, int (*fds)[2], int i);
+void		process_heredoc_cmd(t_cmd *sys, int **fds, int i, int *index);
+void		process_first_cmd(t_cmd *sys, int **fds, int i, int *index);
+void		process_last_cmd(t_cmd *sys, int **fds, int i, int *index);
+void		process_middle_cmd(t_cmd *sys, int **fds, int i, int *index);
 
-void		execute_first_cmd(t_cmd *sys, int (*fds)[2], int order);
-void		execute_middle_cmd(t_cmd *sys, int (*fds)[2], int order);
-void		execute_last_cmd(t_cmd *sys, int (*fds)[2], int order);
+void		execute_heredoc_cmd(t_cmd *sys, int **fds, int order, int index);
+void		execute_first_cmd(t_cmd *sys, int **fds, int order, int index);
+void		execute_middle_cmd(t_cmd *sys, int **fds, int order, int index);
+void		execute_last_cmd(t_cmd *sys, int **fds, int order, int index);
 
 void		check_num_args(int argc);
 void		free_all(t_cmd *sys);
