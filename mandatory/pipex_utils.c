@@ -16,8 +16,8 @@ void	check_num_args(int argc)
 {
 	if (argc != 5)
 	{
-		perror("Number of arguments is invalid.");
-		exit(ERROR);
+		ft_putstr_fd("Number of arguments is invalid.", 2);
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -25,10 +25,18 @@ void	exit_free_error(t_cmd *sys)
 {
 	free_all(sys);
 	perror("Error");
-	exit(ERROR);
+	exit(EXIT_FAILURE);
 }
 
-void	free_all(t_cmd *sys)
+void	error_file(char *file, t_cmd *sys)
+{
+	free_all(sys);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(": no such file or directory", 2);
+	exit(EXIT_FAILURE);
+}
+
+void	free_cmd_args(t_cmd *sys)
 {
 	int	i;
 	int	j;
@@ -48,6 +56,13 @@ void	free_all(t_cmd *sys)
 	}
 	free(sys->cmd);
 	free(sys->args);
+}
+
+void	free_all(t_cmd *sys)
+{
+	int	i;
+
+	free_cmd_args(sys);
 	i = 0;
 	while (sys->paths[i] != NULL)
 	{
@@ -55,4 +70,12 @@ void	free_all(t_cmd *sys)
 		i++;
 	}
 	free(sys->paths);
+	i = 0;
+	while (i < sys->number_of_fds)
+	{
+		free(sys->fds[i]);
+		i++;
+	}
+	free(sys->fds);
+	free(sys);
 }

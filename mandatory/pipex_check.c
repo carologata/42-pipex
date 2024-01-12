@@ -30,7 +30,7 @@ int	check_access(char *path_name)
 		return (free(path_name), NOT_FOUND);
 }
 
-void	check_status(t_cmd *sys, int status, char *cmd)
+void	check_status(int status, char *cmd)
 {
 	char	*cmd_no_slash;
 
@@ -42,8 +42,6 @@ void	check_status(t_cmd *sys, int status, char *cmd)
 		ft_putstr_fd(": command not readable\n", 2);
 	else
 		ft_putstr_fd(": command not executable\n", 2);
-	free_all(sys);
-	exit(ERROR);
 }
 
 char	*check_paths(t_cmd *sys, int order)
@@ -63,6 +61,9 @@ char	*check_paths(t_cmd *sys, int order)
 		i++;
 	}
 	if (status != FOUND)
-		check_status(sys, status, sys->cmd[order]);
+	{
+		check_status(status, sys->cmd[order]);
+		return (NULL);
+	}
 	return (path_name);
 }
