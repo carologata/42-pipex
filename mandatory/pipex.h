@@ -40,6 +40,15 @@ typedef struct s_cmd
 	int		number_of_fds;
 }			t_cmd;
 
+typedef struct s_flags
+{
+	int		count_word;
+	int		count_flag;
+	int		quote_flag;
+	int		quote_aux;
+	char	quote;
+}			t_flags;
+
 void		fill_args(t_cmd *sys, int argc, char *argv[], int constants);
 void		fill_paths(t_cmd *sys, char *envp[]);
 void		fill_cmds(t_cmd *sys, int argc, int constants);
@@ -64,5 +73,9 @@ void		check_num_args(int argc);
 void		exit_free_error(t_cmd *sys);
 void		error_file(char *file, t_cmd *sys);
 void		free_all(t_cmd *sys);
+
+char		**ft_split_modified(char *s, char c);
+void		ft_update_quote_flag(int *quote_flag, int *quote_aux);
+int			ft_count_leters(char *s, char c, char quote, int *j);
 
 #endif

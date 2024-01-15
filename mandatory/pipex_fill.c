@@ -21,7 +21,7 @@ void	fill_args(t_cmd *sys, int argc, char *argv[], int constants)
 	j = 0;
 	while (i < argc - 1)
 	{
-		sys->args[j] = ft_split(argv[i], ' ');
+		sys->args[j] = ft_split_modified(argv[i], ' ');
 		i++;
 		j++;
 	}

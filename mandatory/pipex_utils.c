@@ -32,7 +32,7 @@ void	error_file(char *file, t_cmd *sys)
 {
 	free_all(sys);
 	ft_putstr_fd(file, 2);
-	ft_putstr_fd(": no such file or directory", 2);
+	ft_putstr_fd(": no such file or directory\n", 2);
 	exit(EXIT_FAILURE);
 }
 

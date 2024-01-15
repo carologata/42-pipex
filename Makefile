@@ -1,17 +1,18 @@
 NAME	:= pipex
 NAME_BONUS	:=	pipex_bonus
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
 LIBFT	:= ./libft
 
 HEADERS	:= -I $(LIBFT)
 LIBS	:= $(LIBFT)/libft.a
 
 SRCS	:= $(addprefix ./mandatory/, pipex.c pipex_fill.c pipex_check.c pipex_process.c \
-					pipex_exec.c pipex_utils.c)
+					pipex_exec.c pipex_utils.c pipex_split.c pipex_split_utils.c) 
 OBJS	:= ${SRCS:.c=.o}
 
-SRCS_BONUS	:= $(addprefix ./bonus/, pipex_bonus.c pipex_fill_bonus.c pipex_check_bonus.c \
-					pipex_process_bonus.c pipex_exec_bonus.c pipex_utils_bonus.c)
+SRCS_BONUS	:= $(addprefix ./bonus/, pipex_bonus.c pipex_fill_bonus.c pipex_check_bonus.c pipex_process_bonus.c \
+					pipex_exec_bonus.c pipex_utils_bonus.c pipex_split_bonus.c pipex_split_utils_bonus.c)
+
 OBJS_BONUS	:= ${SRCS_BONUS:.c=.o}
 
 all: libft $(NAME)
