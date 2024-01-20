@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 12:17:33 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/09 12:17:38 by cogata           ###   ########.fr       */
+/*   Created: 2024/01/20 18:40:20 by cogata            #+#    #+#             */
+/*   Updated: 2024/01/20 18:40:21 by cogata           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	fill_args(t_cmd *sys, int argc, char *argv[], int constants)
 	j = 0;
 	while (i < argc - 1)
 	{
-		sys->args[j] = ft_split(argv[i], ' ');
+		sys->args[j] = ft_split_modified(argv[i], ' ');
+		if (sys->args[j] == NULL)
+			free_fill_args(sys, j);
 		i++;
 		j++;
 	}

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 12:18:02 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/09 12:18:05 by cogata           ###   ########.fr       */
+/*   Created: 2024/01/20 18:40:26 by cogata            #+#    #+#             */
+/*   Updated: 2024/01/20 18:40:28 by cogata           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	process_first_cmd(t_cmd *sys, int i, int index)
 		execute_first_cmd(sys, sys->fds, i, index);
 	else
 	{
-		wait(NULL);
 		close(sys->fds[index][1]);
 	}
 }
@@ -69,7 +68,6 @@ void	process_middle_cmd(t_cmd *sys, int i, int index)
 		execute_middle_cmd(sys, sys->fds, i, index);
 	else
 	{
-		wait(NULL);
 		close(sys->fds[index - 1][0]);
 		close(sys->fds[index][1]);
 	}
@@ -89,7 +87,7 @@ void	process_last_cmd(t_cmd *sys, int i, int index)
 	{
 		waitpid(fork_id, &status, 0);
 		close(sys->fds[index - 1][0]);
-		if ((((status) & 0x7f) == 0) && (((status) & 0xff00) >> 8))
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
 		{
 			free_all(sys);
 			status = get_exit_status(status);

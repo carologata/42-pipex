@@ -51,7 +51,6 @@ void	process_first_cmd(t_cmd *sys, int i, int index)
 		execute_first_cmd(sys, sys->fds, i, index);
 	else
 	{
-		wait(NULL);
 		close(sys->fds[index][1]);
 	}
 }
@@ -69,7 +68,6 @@ void	process_middle_cmd(t_cmd *sys, int i, int index)
 		execute_middle_cmd(sys, sys->fds, i, index);
 	else
 	{
-		wait(NULL);
 		close(sys->fds[index - 1][0]);
 		close(sys->fds[index][1]);
 	}

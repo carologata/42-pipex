@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 12:17:12 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/09 12:17:15 by cogata           ###   ########.fr       */
+/*   Created: 2024/01/20 18:40:01 by cogata            #+#    #+#             */
+/*   Updated: 2024/01/20 18:40:03 by cogata           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,37 @@ int	check_access(char *path_name)
 		return (free(path_name), NOT_FOUND);
 }
 
+void	ft_put_strjoin_fd(char *str1, char *str2, int fd)
+{
+	int		buffer_size;
+	char	*buffer;
+
+	if (fd > 0 && str1 != 0 && str2 != 0)
+	{
+		buffer_size = ft_strlen(str1) + ft_strlen(str2);
+		buffer = ft_strjoin(str1, str2);
+		write(fd, buffer, buffer_size);
+		free(buffer);
+	}
+	else if (fd > 0 && str1 != 0)
+	{
+		buffer_size = ft_strlen(str1);
+		buffer = str1;
+		write(fd, buffer, buffer_size);
+	}
+}
+
 void	check_status(int status, char *cmd)
 {
 	char	*cmd_no_slash;
 
 	cmd_no_slash = &cmd[1];
-	ft_putstr_fd(cmd_no_slash, 2);
 	if (status == NOT_FOUND)
-		ft_putstr_fd(": command not found\n", 2);
+		ft_put_strjoin_fd(cmd_no_slash, ": command not found\n", 2);
 	else if (status == R_NOK)
-		ft_putstr_fd(": command not readable\n", 2);
+		ft_put_strjoin_fd(cmd_no_slash, ": command not readable\n", 2);
 	else
-		ft_putstr_fd(": command not executable\n", 2);
+		ft_put_strjoin_fd(cmd_no_slash, ": command not executable\n", 2);
 }
 
 char	*check_paths(t_cmd *sys, int order)

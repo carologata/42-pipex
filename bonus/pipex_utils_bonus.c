@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 12:18:11 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/09 12:18:13 by cogata           ###   ########.fr       */
+/*   Created: 2024/01/20 18:42:01 by cogata            #+#    #+#             */
+/*   Updated: 2024/01/20 18:42:02 by cogata           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	exit_free_error(t_cmd *sys)
 void	error_file(char *file, t_cmd *sys)
 {
 	free_all(sys);
-	ft_putstr_fd(file, 2);
-	ft_putstr_fd(": no such file or directory", 2);
+	perror(file);
 	exit(EXIT_FAILURE);
 }
 

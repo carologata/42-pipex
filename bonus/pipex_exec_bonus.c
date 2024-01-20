@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cogata <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/09 12:17:25 by cogata            #+#    #+#             */
-/*   Updated: 2024/01/09 12:17:27 by cogata           ###   ########.fr       */
+/*   Created: 2024/01/20 18:40:13 by cogata            #+#    #+#             */
+/*   Updated: 2024/01/20 18:40:15 by cogata           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,9 @@ void	execute_first_cmd(t_cmd *sys, int **fds, int order, int index)
 	fd_in = open(sys->infile, O_RDONLY);
 	if (fd_in < 0)
 		error_file(sys->infile, sys);
-	else
-	{
-		if (dup2(fd_in, STDIN_FILENO) == -1)
-			exit_free_error(sys);
-		close(fd_in);
-	}
-	if (dup2(fds[index][1], STDOUT_FILENO) == -1)
-		exit_free_error(sys);
+	dup2(fd_in, STDIN_FILENO);
+	close(fd_in);
+	dup2(fds[index][1], STDOUT_FILENO);
 	close(fds[index][0]);
 	path_name = check_paths(sys, order);
 	if (path_name == NULL)
@@ -82,20 +77,12 @@ void	execute_last_cmd(t_cmd *sys, int **fds, int order, int index)
 	int		fd_out;
 	char	*path_name;
 
-	if (dup2(fds[index - 1][0], STDIN_FILENO) == -1)
-		exit_free_error(sys);
-	if (sys->is_heredoc == 1)
-		fd_out = open(sys->outfile, O_WRONLY | O_CREAT | O_APPEND);
-	else
-		fd_out = open(sys->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	dup2(fds[index - 1][0], STDIN_FILENO);
+	fd_out = open(sys->outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd_out < 0)
 		error_file(sys->outfile, sys);
-	else
-	{
-		if (dup2(fd_out, STDOUT_FILENO) == -1)
-			exit_free_error(sys);
-		close(fd_out);
-	}
+	dup2(fd_out, STDOUT_FILENO);
+	close(fd_out);
 	path_name = check_paths(sys, order);
 	if (path_name == NULL)
 	{
