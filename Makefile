@@ -43,7 +43,4 @@ fclean: clean
 
 re: clean all
 
-norm:
-	norminette -R CheckForbiddenSourceHeader $(SRCS) $(SRCS_BONUS) ./include
-
 .PHONY: all, clean, fclean, re, libft
