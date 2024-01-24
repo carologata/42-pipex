@@ -49,7 +49,7 @@ void	execute_first_cmd(t_cmd *sys, int **fds, int order, int index)
 		free_all(sys);
 		exit(127);
 	}
-	if (execve(path_name, sys->args[order], NULL) == -1)
+	if (execve(path_name, sys->args[order], sys->envp) == -1)
 		exit_free_error(sys);
 }
 
@@ -68,7 +68,7 @@ void	execute_middle_cmd(t_cmd *sys, int **fds, int order, int index)
 		free_all(sys);
 		exit(127);
 	}
-	if (execve(path_name, sys->args[order], NULL) == -1)
+	if (execve(path_name, sys->args[order], sys->envp) == -1)
 		exit_free_error(sys);
 }
 
@@ -89,6 +89,6 @@ void	execute_last_cmd(t_cmd *sys, int **fds, int order, int index)
 		free_all(sys);
 		exit(127);
 	}
-	if (execve(path_name, sys->args[order], NULL) == -1)
+	if (execve(path_name, sys->args[order], sys->envp) == -1)
 		exit_free_error(sys);
 }

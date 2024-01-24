@@ -83,6 +83,7 @@ void	fill_when_standard(t_cmd *sys, int argc, char **argv, char **envp)
 	fill_paths(sys, envp);
 	sys->cmd = malloc((argc - sys->constant_args) * sizeof(char *));
 	fill_cmds(sys, argc, sys->constant_args);
+	sys->envp = envp;
 }
 
 void	fill_when_heredoc(t_cmd *sys, int argc, char **argv, char **envp)
@@ -106,4 +107,5 @@ void	fill_when_heredoc(t_cmd *sys, int argc, char **argv, char **envp)
 	fill_paths(sys, envp);
 	sys->cmd = malloc((argc - sys->constant_args) * sizeof(char *));
 	fill_cmds(sys, argc, sys->constant_args);
+	sys->envp = envp;
 }

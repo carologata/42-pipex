@@ -38,6 +38,7 @@ typedef struct s_cmd
 	char	*limiter;
 	int		is_heredoc;
 	int		number_of_fds;
+	char	**envp;
 }			t_cmd;
 
 typedef struct s_flags
